@@ -8,17 +8,12 @@ const UserMenu = ({ user }) => {
   const [isMenu, setIsMenu] = useState(false);
   const [item, setItem] = useState("regular");
   const menuRef = useRef();
-  // useEffect(() => {
-  //   const getClickOutside = (e) => {
-  //     if (isMenu && e.target !== menuRef.current) {
-  //       setIsMenu(false);
-  //     }
-  //   }
-  //   window.addEventListener('click', getClickOutside);
-  //   return () => {
-  //     window.removeEventListener('click', getClickOutside);
-  //   }
-  // }, [isMenu]);
+  const getClickOutside = (e) => {
+    if (isMenu && e.target !== menuRef.current) {
+      setIsMenu(false);
+    }
+  }
+  window.addEventListener('click', getClickOutside);
 
   const [longPressCount, setlongPressCount] = useState(0);
   const [clickCount, setClickCount] = useState(0);
@@ -51,15 +46,15 @@ const UserMenu = ({ user }) => {
         <AnimatePresence>
           {isMenu && (
             <motion.ul
-              initial={{ opacity: 0, y: "-50%" }}
-              animate={{ opacity: 1, y: "0%" }}
-              exit={{ opacity: 0, y: "-50%", transition: { duration: "0.15" } }}
+              initial={{ opacity: 0, y: "-150%" }}
+              animate={{ opacity: 1, y: "-180%" }}
+              exit={{ opacity: 0, y: "-150%", transition: { duration: "0.15" } }}
               transition={{ type: "spring", stiffness: "100", duration: "0.05" }}
               className="user-menu"
             >
-              <li onClick={() => setItem("Regular")} style={{ color: `${item === "Regular" ? 'red' : ''}` }}>Regular</li>
-              <li onClick={() => setItem("Emergency")} style={{ color: `${item === "Emergency" ? 'red' : ''}` }}>Emergency</li>
-              <li onClick={() => setItem("Urgent")} style={{ color: `${item === "Urgent" ? 'red' : ''}` }}>Urgent</li>
+              <li onClick={() => setItem("Regular")} style={{ backgroundColor: `black`, color: `${item === "Regular" ? 'green' : ''}` }}>Regular</li>
+              <li onClick={() => setItem("Emergency")} style={{ backgroundColor: `pink`, color: `${item === "Emergency" ? 'green' : ''}` }}>Emergency</li>
+              <li onClick={() => setItem("Urgent")} style={{ backgroundColor: `red`, color: `${item === "Urgent" ? 'green' : ''}` }}>Urgent</li>
             </motion.ul>
           )}
         </AnimatePresence>
